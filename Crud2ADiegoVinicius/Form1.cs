@@ -31,7 +31,8 @@ namespace Crud2ADiegoVinicius
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            Pessoa pessoa = new Pessoa();
+            Salvar(pessoa);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -53,6 +54,21 @@ namespace Crud2ADiegoVinicius
         {
 
         }
+
+        //Metodo para salvar
+        private void Salvar(Pessoa pessoa)
+        {
+            PessoaBLL pessoaBLL = new PessoaBLL();
+            try
+            {
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         //Metodo para listar os dados no grid
         private void Listar()
         {
@@ -61,6 +77,36 @@ namespace Crud2ADiegoVinicius
             try
             {
                 dataGridView.DataSource = pessoaBLL.Listar();
+
+                //Renomear Colunas
+                dataGridView.Columns[0].HeaderText = "Codigo";
+                dataGridView.Columns[1].HeaderText = "Nome";
+                dataGridView.Columns[2].HeaderText = "Dt Nasc";
+                dataGridView.Columns[3].HeaderText = "Sexo";
+                dataGridView.Columns[4].HeaderText = "CPF";
+                dataGridView.Columns[5].HeaderText = "Telefone";
+                dataGridView.Columns[6].HeaderText = "Endereço";
+                dataGridView.Columns[7].HeaderText = "Bairro";
+                dataGridView.Columns[8].HeaderText = "Cidade";
+                dataGridView.Columns[9].HeaderText = "UF";
+                dataGridView.Columns[10].HeaderText = "CEP";
+
+                //Excluir e mover colunas do datagrid
+
+                dataGridView.Columns[6].Visible = false;
+                dataGridView.Columns[7].Visible = false;
+                dataGridView.Columns[8].Visible = false;
+                dataGridView.Columns[9].Visible = false;
+                dataGridView.Columns[10].Visible = false;
+
+                //Ajustar largura das colunas
+
+                dataGridView.Columns[0].Width = 45;
+                dataGridView.Columns[1].Width = 160;
+                dataGridView.Columns[2].Width = 70;
+                dataGridView.Columns[3].Width = 40;
+                dataGridView.Columns[4].Width = 75;
+                dataGridView.Columns[5].Width = 85;
             }
             catch (Exception erro)
             {
@@ -71,5 +117,6 @@ namespace Crud2ADiegoVinicius
         {
             Listar();
         }
+        
     }
 }

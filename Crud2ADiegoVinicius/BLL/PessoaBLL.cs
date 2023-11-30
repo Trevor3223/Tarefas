@@ -11,6 +11,21 @@ namespace Crud2ADiegoVinicius.BLL
     public class PessoaBLL
     {
         PessoaDAL pessoaDal = new PessoaDAL();
+        //Metodo para salvar
+
+        public void Salvar(Pessoa pessoa)
+        {
+            try
+            {
+                pessoaDal.Salvar(pessoa);
+            }
+            catch (Exception erro)
+            {
+
+                throw erro;
+            }
+        }
+        
         //Metodo para listar
         public DataTable Listar()
         {
