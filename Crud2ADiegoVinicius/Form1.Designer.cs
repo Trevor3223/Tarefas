@@ -49,7 +49,7 @@
             this.cbEstado = new System.Windows.Forms.ComboBox();
             this.mtbCPF = new System.Windows.Forms.MaskedTextBox();
             this.mtbCEP = new System.Windows.Forms.MaskedTextBox();
-            this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
+            this.mtbCelular = new System.Windows.Forms.MaskedTextBox();
             this.dtNascimento = new System.Windows.Forms.DateTimePicker();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.btnSalvar = new System.Windows.Forms.Button();
@@ -297,14 +297,14 @@
             this.mtbCEP.Size = new System.Drawing.Size(100, 23);
             this.mtbCEP.TabIndex = 7;
             // 
-            // maskedTextBox1
+            // mtbCelular
             // 
-            this.maskedTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.maskedTextBox1.Location = new System.Drawing.Point(382, 301);
-            this.maskedTextBox1.Mask = "(99) 00000-0000";
-            this.maskedTextBox1.Name = "maskedTextBox1";
-            this.maskedTextBox1.Size = new System.Drawing.Size(100, 23);
-            this.maskedTextBox1.TabIndex = 10;
+            this.mtbCelular.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mtbCelular.Location = new System.Drawing.Point(382, 301);
+            this.mtbCelular.Mask = "(99) 00000-0000";
+            this.mtbCelular.Name = "mtbCelular";
+            this.mtbCelular.Size = new System.Drawing.Size(100, 23);
+            this.mtbCelular.TabIndex = 10;
             // 
             // dtNascimento
             // 
@@ -329,6 +329,7 @@
             this.dataGridView.Size = new System.Drawing.Size(589, 150);
             this.dataGridView.TabIndex = 16;
             this.dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellContentClick);
+            this.dataGridView.DoubleClick += new System.EventHandler(this.dataGridView_DoubleClick);
             // 
             // btnSalvar
             // 
@@ -417,8 +418,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(619, 503);
+            this.BackColor = System.Drawing.Color.Lavender;
+            this.ClientSize = new System.Drawing.Size(622, 503);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.btnExibir);
             this.Controls.Add(this.btnAlterar);
@@ -426,7 +427,7 @@
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.dtNascimento);
-            this.Controls.Add(this.maskedTextBox1);
+            this.Controls.Add(this.mtbCelular);
             this.Controls.Add(this.mtbCEP);
             this.Controls.Add(this.mtbCPF);
             this.Controls.Add(this.cbEstado);
@@ -487,7 +488,7 @@
         private System.Windows.Forms.ComboBox cbEstado;
         private System.Windows.Forms.MaskedTextBox mtbCPF;
         private System.Windows.Forms.MaskedTextBox mtbCEP;
-        private System.Windows.Forms.MaskedTextBox maskedTextBox1;
+        private System.Windows.Forms.MaskedTextBox mtbCelular;
         private System.Windows.Forms.DateTimePicker dtNascimento;
         private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.Button btnSalvar;

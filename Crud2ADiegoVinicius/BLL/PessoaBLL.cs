@@ -5,12 +5,26 @@ using System.Text;
 using System.Threading.Tasks;
 using Crud2ADiegoVinicius.DAL;
 using System.Data;
+using Crud2ADiegoVinicius.Model;
 
 namespace Crud2ADiegoVinicius.BLL
 {
-    public class PessoaBLL
+    public class PessoaBLL 
     {
         PessoaDAL pessoaDal = new PessoaDAL();
+        //Metodo para editar
+        public void Alterar()
+        {
+            try
+            {
+                pessoaDAL.Alterar(pessoa);
+            }
+            catch (Exception erro)
+            {
+
+                throw erro;
+            }
+        }
         //Metodo para salvar
 
         public void Salvar(Pessoa pessoa)

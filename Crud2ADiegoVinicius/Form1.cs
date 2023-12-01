@@ -18,6 +18,68 @@ namespace Crud2ADiegoVinicius
         {
             InitializeComponent();
         }
+        //Metodo para limpar campos
+        public void Limpar()
+        {
+            txtCódigo.Clear();
+            txtNome.Clear();
+            mtbCPF.Clear();
+            mtbCelular.Clear();
+            txtEndereco.Clear();
+            txtBairro.Clear();
+            txtCidade.Clear();
+            mtbCEP.Clear();
+            cbSexo.SelectedIndex = -1;
+            cbEstado.SelectedIndex = -1;
+            txtNome.BackColor = Color.White;
+            mtbCPF.BackColor = Color.White;
+            cbSexo.BackColor = Color.White;
+
+        }
+        //Metodo para editar
+        public void Alterar(Pessoa pessoa)
+        {
+            PessoaBLL pessoaBLL = new PessoaBLL();
+            try
+            {
+                if (txtNome.Text.Trim() == String.Empty || txtNome.Text.Trim().Length < 3)
+                {
+                    MessageBox.Show("O Campo NOME Não pode ser vazio!", "Alerta!",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information); //Exibe uma caixa de aleta
+                    txtNome.BackColor = Color.LightYellow; //Mudar cor do campo
+                    cbSexo.BackColor = Color.White;
+                    mtbCPF.BackColor = Color.White;
+                }
+
+                else if (mtbCPF.MaskCompleted)
+                {
+                    MessageBox.Show("O Campo CPF Não pode ser vazio!", "Alerta!",
+                   MessageBoxButtons.OK, MessageBoxIcon.Information); //Exibe uma caixa de aleta
+                    txtNome.BackColor = Color.White; //Mudar cor do campo
+                    cbSexo.BackColor = Color.White;
+                    mtbCPF.BackColor = Color.LightYellow;
+                }
+                else if (cbSexo.Text == String.Empty)
+                {
+                    MessageBox.Show("O Campo Sexo Não pode ser vazio!", "Alerta!",
+            MessageBoxButtons.OK, MessageBoxIcon.Information); //Exibe uma caixa de aleta
+                    txtNome.BackColor = Color.White; //Mudar cor do campo
+                    cbSexo.BackColor = Color.LightYellow;
+                    mtbCPF.BackColor = Color.White;
+                }
+                else
+                {
+                    pessoa.Id = Convert.ToInt32(txtCódigo.Text);
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+            {
+                throw;
+            }
+        }
 
         private void label3_Click(object sender, EventArgs e)
         {
@@ -31,16 +93,22 @@ namespace Crud2ADiegoVinicius
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //Salvar e Limpar
             Pessoa pessoa = new Pessoa();
             Salvar(pessoa);
+            Limpar();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            //Botão Alterar
+            Pessoa pessoa = new Pessoa();
+            Alterar(pessoa);
         }
+    
+    }
 
-        private void label11_Click(object sender, EventArgs e)
+    private void label11_Click(object sender, EventArgs e)
         {
 
         }
@@ -61,12 +129,57 @@ namespace Crud2ADiegoVinicius
             PessoaBLL pessoaBLL = new PessoaBLL();
             try
             {
+                if (txtNome.Text.Trim() == String.Empty || txtNome.Text.Trim().Length < 3)
+                {
+                    MessageBox.Show("O Campo NOME Não pode ser vazio!", "Alerta!",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information); //Exibe uma caixa de aleta
+                    txtNome.BackColor = Color.LightYellow; //Mudar cor do campo
+                    cbSexo.BackColor = Color.White;
+                    mtbCPF.BackColor = Color.White;
+                }
+    
+                else if (mtbCPF.MaskCompleted)
+                {
+                    MessageBox.Show("O Campo CPF Não pode ser vazio!", "Alerta!",
+                   MessageBoxButtons.OK, MessageBoxIcon.Information); //Exibe uma caixa de aleta
+                    txtNome.BackColor = Color.White; //Mudar cor do campo
+                    cbSexo.BackColor = Color.White;
+                    mtbCPF.BackColor = Color.LightYellow;
+                }
+                else if (cbSexo.Text == String.Empty)
+                {
+                    MessageBox.Show("O Campo Sexo Não pode ser vazio!", "Alerta!",
+            MessageBoxButtons.OK, MessageBoxIcon.Information); //Exibe uma caixa de aleta
+                    txtNome.BackColor = Color.White; //Mudar cor do campo
+                    cbSexo.BackColor = Color.LightYellow;
+                    mtbCPF.BackColor = Color.White;
+                }
+                else
+                {
+                    pessoa.Nome = txtNome.Text;
+                    pessoa.Nascimento = dtNascimento.Text;
+                    pessoa.Sexo = cbSexo.Text;
+                    mtbCPF.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals; //remove a mascara do campo cpf
+                    pessoa.Cpf = mtbCPF.Text;
+                    mtbCelular.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
+                    pessoa.Celular = mtbCelular.Text;
+                    pessoa.Endereco = txtEndereco.Text;
+                    pessoa.Bairro = txtBairro.Text;
+                    pessoa.Cidade = txtCidade.Text;
+                    pessoa.Estado = cbEstado.Text;
+                    mtbCEP.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
+                    pessoa.Cep = mtbCEP.Text;
 
+                    pessoaBLL.Salvar(pessoa);
+                    MessageBox.Show("Cadastro realizado com sucesso!", "Aviso!",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Limpar();
+                }
             }
-            catch (Exception)
+            catch (Exception erro)
             {
-
-                throw;
+                MessageBox.Show("Erro ao realizar novo Cadastro!\n"+erro, "Erro!",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
         //Metodo para listar os dados no grid
@@ -117,6 +230,22 @@ namespace Crud2ADiegoVinicius
         {
             Listar();
         }
-        
+
+        private void dataGridView_DoubleClick(object sender, EventArgs e)
+        {
+            txtCódigo.Text = dataGridView.CurrentRow.Cells[0].Value.ToString();
+            txtNome.Text = dataGridView.CurrentRow.Cells[1].Value.ToString();
+            dtNascimento.Text = dataGridView.CurrentRow.Cells[2].Value.ToString();
+            cbSexo.Text = dataGridView.CurrentRow.Cells[3].Value.ToString();
+            mtbCPF.Text = dataGridView.CurrentRow.Cells[4].Value.ToString();
+            mtbCelular.Text = dataGridView.CurrentRow.Cells[5].Value.ToString();
+            txtEndereco.Text = dataGridView.CurrentRow.Cells[6].Value.ToString();
+            txtBairro.Text = dataGridView.CurrentRow.Cells[7].Value.ToString();
+            txtCidade.Text = dataGridView.CurrentRow.Cells[8].Value.ToString();
+            cbEstado.Text = dataGridView.CurrentRow.Cells[9].Value.ToString();
+            mtbCEP.Text = dataGridView.CurrentRow.Cells[10].Value.ToString();
+
+
+        }
     }
 }
